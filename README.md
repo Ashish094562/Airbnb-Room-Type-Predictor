@@ -164,9 +164,10 @@ airbnb-room-type-predictor/
 │
 ├── backend/
 │   ├── main.py
+|   ├──  __init__.py
 │   ├── Model_Pipeline.pkl
-│   └── requirements.txt
-│
+│   
+└── requirements.txt
 └── README.md
 ```
 

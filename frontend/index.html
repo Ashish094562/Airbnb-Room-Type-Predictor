@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NYC Airbnb Room Type Predictor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="background">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <header class="navbar">
+        <div class="logo">
+            <div class="logo-icon">🏠</div>
+            <div>
+                <h2>NYC StayAI</h2>
+                <span>Room Type Predictor</span>
+            </div>
+        </div>
+
+        <div class="api-status">
+            <span class="status-dot"></span>
+            <span id="apiStatus">Checking API...</span>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section class="hero">
+            <div class="hero-badge">
+                ✨ Machine Learning Powered
+            </div>
+
+            <h1>
+                Predict Your
+                <span>NYC Airbnb</span>
+                Room Type
+            </h1>
+
+            <p>
+                Enter your Airbnb listing details and let our machine learning
+                model predict the most likely room type.
+            </p>
+        </section>
+
+        <section class="main-grid">
+
+            <div class="card form-card">
+
+                <div class="card-header">
+                    <div>
+                        <h2>Listing Information</h2>
+                        <p>Enter the details of your Airbnb listing</p>
+                    </div>
+
+                    <div class="step-badge">
+                        10 Fields
+                    </div>
+                </div>
+
+                <form id="predictionForm">
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label for="latitude">
+                                Latitude
+                                <span>-90 to 90</span>
+                            </label>
+
+                            <input
+                                type="number"
+                                id="latitude"
+                                step="any"
+                                min="-90"
+                                max="90"
+                                value="40.7128"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="longitude">
+                                Longitude
+                                <span>-180 to 180</span>
+                            </label>
+
+                            <input
+                                type="number"
+                                id="longitude"
+                                step="any"
+                                min="-180"
+                                max="180"
+                                value="-74.0060"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="price">
+                                Price Per Night
+                                <span>USD</span>
+                            </label>
+
+                            <div class="input-with-icon">
+                                <span>$</span>
+                                <input
+                                    type="number"
+                                    id="price"
+                                    min="0"
+                                    step="0.01"
+                                    value="150"
+                                    required
+                                >
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="minimum_nights">
+                                Minimum Nights
+                            </label>
+
+                            <input
+                                type="number"
+                                id="minimum_nights"
+                                min="1"
+                                max="365"
+                                value="2"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="number_of_reviews">
+                                Number of Reviews
+                            </label>
+
+                            <input
+                                type="number"
+                                id="number_of_reviews"
+                                min="0"
+                                value="45"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reviews_per_month">
+                                Reviews Per Month
+                            </label>
+
+                            <input
+                                type="number"
+                                id="reviews_per_month"
+                                min="0"
+                                step="0.1"
+                                value="2.5"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="calculated_host_listings_count">
+                                Host Listings
+                            </label>
+
+                            <input
+                                type="number"
+                                id="calculated_host_listings_count"
+                                min="0"
+                                value="3"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="availability_365">
+                                Availability
+                                <span>Days / Year</span>
+                            </label>
+
+                            <div class="range-wrapper">
+                                <input
+                                    type="range"
+                                    id="availability_365"
+                                    min="0"
+                                    max="365"
+                                    value="180"
+                                >
+                                <div class="range-value">
+                                    <strong id="availabilityValue">180</strong>
+                                    <span>days</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="neighbourhood_group">
+                                Borough
+                            </label>
+
+                            <select id="neighbourhood_group" required>
+                                <option value="">Select Borough</option>
+                                <option value="Manhattan">Manhattan</option>
+                                <option value="Brooklyn">Brooklyn</option>
+                                <option value="Queens">Queens</option>
+                                <option value="Bronx">Bronx</option>
+                                <option value="Staten Island">Staten Island</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="neighbourhood">
+                                Neighborhood
+                            </label>
+
+                            <select id="neighbourhood" required>
+                                <option value="">Select Neighborhood</option>
+                                <option value="Upper West Side">Upper West Side</option>
+                                <option value="Upper East Side">Upper East Side</option>
+                                <option value="Harlem">Harlem</option>
+                                <option value="Chelsea">Chelsea</option>
+                                <option value="SoHo">SoHo</option>
+                                <option value="Midtown">Midtown</option>
+                                <option value="Greenpoint">Greenpoint</option>
+                                <option value="Williamsburg">Williamsburg</option>
+                                <option value="Bedford-Stuyvesant">Bedford-Stuyvesant</option>
+                                <option value="Astoria">Astoria</option>
+                                <option value="Long Island City">Long Island City</option>
+                                <option value="Bushwick">Bushwick</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="location-preview">
+                        <div class="location-icon">📍</div>
+                        <div>
+                            <strong>Location</strong>
+                            <p id="locationText">
+                                40.7128, -74.0060
+                            </p>
+                        </div>
+                    </div>
+
+                    <div id="errorMessage" class="error-message">
+                        <span>⚠️</span>
+                        <p></p>
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="predict-button"
+                        id="predictButton"
+                    >
+                        <span id="buttonText">
+                            Predict Room Type
+                        </span>
+
+                        <span
+                            class="spinner"
+                            id="spinner"
+                        ></span>
+
+                        <span class="arrow">→</span>
+                    </button>
+
+                </form>
+
+            </div>
+
+            <div class="card result-card">
+
+                <div class="result-header">
+                    <div>
+                        <h2>Prediction Result</h2>
+                        <p>AI model analysis</p>
+                    </div>
+
+                    <div class="ai-icon">
+                        ✨
+                    </div>
+                </div>
+
+                <div
+                    class="result-placeholder"
+                    id="resultPlaceholder"
+                >
+                    <div class="placeholder-icon">
+                        🏠
+                    </div>
+
+                    <h3>Ready to Predict</h3>
+
+                    <p>
+                        Fill in your listing information and click
+                        <strong>Predict Room Type</strong> to see the result.
+                    </p>
+                </div>
+
+                <div
+                    class="prediction-result"
+                    id="predictionResult"
+                >
+
+                    <div class="prediction-label">
+                        MOST LIKELY ROOM TYPE
+                    </div>
+
+                    <div
+                        class="prediction-value"
+                        id="predictionValue"
+                    >
+                        Entire home/apt
+                    </div>
+
+                    <div class="confidence-container">
+
+                        <div class="confidence-top">
+                            <span>Model Confidence</span>
+                            <strong id="confidenceValue">
+                                0%
+                            </strong>
+                        </div>
+
+                        <div class="progress-bar">
+                            <div
+                                class="progress-fill"
+                                id="confidenceBar"
+                            ></div>
+                        </div>
+
+                    </div>
+
+                    <div class="probabilities">
+
+                        <div class="probability-title">
+                            <span>Prediction Probabilities</span>
+                        </div>
+
+                        <div id="probabilityBars"></div>
+
+                    </div>
+
+                    <div class="success-message">
+                        <span>✓</span>
+                        Prediction completed successfully
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="info-section">
+
+            <div class="info-card">
+                <div class="info-icon">🤖</div>
+                <div>
+                    <h3>Machine Learning</h3>
+                    <p>Random Forest classification pipeline</p>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">📊</div>
+                <div>
+                    <h3>10 Features</h3>
+                    <p>Location, price, reviews & availability</p>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">⚡</div>
+                <div>
+                    <h3>Fast Prediction</h3>
+                    <p>Get results instantly through FastAPI</p>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>NYC StayAI · Machine Learning Project</p>
+        <span>Built with FastAPI & Scikit-learn</span>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

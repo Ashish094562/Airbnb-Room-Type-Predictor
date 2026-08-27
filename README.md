@@ -75,7 +75,6 @@ The model uses **10 features**:
 
 
 ---
----
 
 ## Model Comparison
 
@@ -88,7 +87,6 @@ The model uses **10 features**:
 
 Random Forest achieved the best overall performance among the evaluated models and was selected for further optimization.
 
----
 
 ## 🔧 Hyperparameter Tuning
 

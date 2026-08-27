@@ -31,32 +31,6 @@ https://airbnb-room-type-predictor-bvjh.onrender.com/
 - Shared room
 - Hotel room
 
----
-
-## Model Comparison
-
-| Model | Accuracy | Macro F1 |
-|---|---:|---:|
-| Logistic Regression | 65.9% | 52.2% |
-| Decision Tree | 78.2% | 64.7% |
-| **Random Forest** | **85.1%** | **71.5%** |
-| Gradient Boosting | 85.0% | 70.5% |
-
-Random Forest achieved the best overall performance among the evaluated models and was selected for further optimization.
-
----
-
-## 🔧 Hyperparameter Tuning
-
-Hyperparameter tuning was performed on the Random Forest model using cross-validation with **Macro F1** as the optimization metric.
-
-### Best Parameters
-
-```text
-n_estimators = 200
-min_samples_split = 10
-max_depth = None
-```
 
 ## 📋 Input Features
 
@@ -98,6 +72,36 @@ The model uses **10 features**:
 **Deployment**
 - Vercel
 - Render
+
+
+---
+---
+
+## Model Comparison
+
+| Model | Accuracy | Macro F1 |
+|---|---:|---:|
+| Logistic Regression | 65.9% | 52.2% |
+| Decision Tree | 78.2% | 64.7% |
+| **Random Forest** | **85.1%** | **71.5%** |
+| Gradient Boosting | 85.0% | 70.5% |
+
+Random Forest achieved the best overall performance among the evaluated models and was selected for further optimization.
+
+---
+
+## 🔧 Hyperparameter Tuning
+
+Hyperparameter tuning was performed on the Random Forest model using cross-validation with **Macro F1** as the optimization metric.
+
+### Best Parameters
+
+```text
+n_estimators = 200
+min_samples_split = 10
+max_depth = None
+```
+
 
 ## 🔌 API
 

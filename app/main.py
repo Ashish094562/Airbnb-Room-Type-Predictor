@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel, Field
 import pandas as pd
 import joblib
+from pathlib import Path
 from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 app.add_middleware(
@@ -24,8 +25,10 @@ COLUMNS = [
     "neighbourhood_group",
     "neighbourhood"
 ]
+BASE_DIR = Path(__file__).resolve().parent
+MODEL_PATH = BASE_DIR / "Model_Pipeline.pkl"
 
-model = joblib.load("Model_Pipeline.pkl")
+model = joblib.load(MODEL_PATH)
 
 
 class Features(BaseModel):

@@ -1,4 +1,4 @@
-const API_URL = "http://127.0.0.1:8000";
+const API_URL = "https://airbnb-room-type-predictor-bvjh.onrender.com";
 
 const form = document.getElementById("predictionForm");
 const predictButton = document.getElementById("predictButton");
